@@ -16,12 +16,13 @@ resource "aws_lb_target_group" "alb_target_group" {
   target_type = "instance"
 
   health_check {
-    healthy_threshold   = 3
-    unhealthy_threshold = 3
+    healthy_threshold   = 2
+    unhealthy_threshold = 10
     timeout             = 5
-    interval            = 30
+    interval            = 15
     path                = "/health"
     port                = "traffic-port"
+    matcher             = "200"
   }
 
   tags = var.tags
